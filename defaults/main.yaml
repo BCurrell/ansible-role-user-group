@@ -25,6 +25,8 @@ ug_user_defaults_remove:
   remove: false
 
 # Defaults for creating and updating the group
-ug_group_defaults:
+ug_group_defaults: {}
 
 ug_group_defaults_remove:
+  # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/group_module.html#parameter-force
+  force: false

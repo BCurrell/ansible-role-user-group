@@ -71,3 +71,43 @@ If you make a PR, please run `pre-commit` if possible in one of the following wa
     - Use a globally installed pre-commit to run pre-commit once.
 - `pre-commit install` (once after `git clone`)
     - Use a globally installed pre-commit to install pre-commit hooks to .git, meaning pre-commit will automatically run when you stage and commit changes to Git.
+
+## Notes
+
+You can pop an item from a dict and maintain the updated dict by doing the following:
+
+```yaml
+- name: 'user_group:user:testing'
+  ansible.builtin.set_fact:
+    popped: "{{ user_instance.pop('popme', '') }}"
+    user_instance: "{{ user_instance | dict2items | rejectattr('key', 'equalto', 'popme') | items2dict }}"
+```
+
+```none
+TASK [user_group : user_group:user:debug] *****************************************************************************************************************************************************************************************************
+ok: [localhost] => {
+    "user": {
+        "name": "test-absent-02",
+        "popme": "popped",
+        "state": "absent"
+    }
+}
+
+TASK [user_group : user_group:user:testing] ***************************************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [user_group : user_group:user:debug] *****************************************************************************************************************************************************************************************************
+ok: [localhost] => {
+    "user_instance": {
+        "force": false,
+        "name": "test-absent-02",
+        "remove": false,
+        "state": "absent"
+    }
+}
+
+TASK [user_group : user_group:user:debug] *****************************************************************************************************************************************************************************************************
+ok: [localhost] => {
+    "popped": "popped"
+}
+```
