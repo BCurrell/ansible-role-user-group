@@ -14,7 +14,7 @@ Windows hosts require [ansible.windows.win_user](https://docs.ansible.com/ansibl
 This role is not currently on Ansible Galaxy. I'm not sure if it every will be. Instead, I recommend using a Git submodule to add this to your playbook:
 
 ```none
-git submodule add https://github.com/BCurrell/ansible-role-user-group.git roles/user-group
+git submodule add https://github.com/BCurrell/ansible-role-user_group.git roles/user_group
 ```
 
 To pull in new changes:
@@ -26,7 +26,7 @@ git submodule update --remote --recursive --checkout
 To remove the submodule:
 
 ```none
-git rm roles/user-group
+git rm roles/user_group
 ```
 
 When the submodule is cloned, you can use it like any other Ansible role:
@@ -38,16 +38,16 @@ When the submodule is cloned, you can use it like any other Ansible role:
 
   roles:
     # Option 1 - Pass the name as a string
-    - 'user-group'
+    - 'user_group'
     # Option 2 - Pass the name to they 'role' key with additional arguments
-    - role: 'user-group'
+    - role: 'user_group'
       vars: {}
 
   tasks:
     # Option 3 - Use the ansible.builtin.include_role module
-    - name: 'Include user-group role'
+    - name: 'Include user_group role'
       ansible.builtin.include_role:
-        name: 'user-group'
+        name: 'user_group'
       vars: {}
 ```
 
