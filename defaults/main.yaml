@@ -14,7 +14,7 @@
 ug_users: []
 ug_groups: []
 
-# Defaults for creating and updating the user
+# Defaults for creating and updating the user.
 ug_user_defaults:
   # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html#parameter-create_home
   create_home: true
@@ -31,18 +31,20 @@ ug_user_defaults:
   # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html#parameter-ssh_key_type
   ssh_key_type: 'ed25519'
 
+# If true, append authorized_keys to the file. If false, delete the file before writing.
 ug_user_default_authorized_keys_append: true
 
-# Defaults for removing the user
+# Defaults for removing the user.
 ug_user_defaults_remove:
   # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html#parameter-force
   force: false
   # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html#parameter-remove
   remove: false
 
-# Defaults for creating and updating the group
+# Defaults for creating and updating the group.
 ug_group_defaults: {}
 
+# Defaults for removing the group.
 ug_group_defaults_remove:
   # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/group_module.html#parameter-force
   force: false
