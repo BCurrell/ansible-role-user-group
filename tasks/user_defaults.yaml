@@ -1,1 +1,16 @@
 ---
+###
+#  When this file is included from user_*.yaml, it has access to the 'user'
+#  loop variable. We can do some checks on that user, and return relevant defaults.
+#  We need to return an instance, not overwrite the original defaults.
+###
+
+- name: 'user_group:user:defaults:remove'
+  when: "(user.state | default('present')) == 'absent'"
+  ansible.builtin.set_fact:
+    user_defaults_instance: "{{ ug_user_defaults_remove }}"
+
+- name: 'user_group:user:defaults:configure'
+  when: "(user.state | default('present')) == 'present'"
+  ansible.builtin.set_fact:
+    user_defaults_instance: "{{ ug_user_defaults }}"

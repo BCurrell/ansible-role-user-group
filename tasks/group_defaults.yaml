@@ -1,1 +1,16 @@
 ---
+###
+#  When this file is included from group_*.yaml, it has access to the 'group'
+#  loop variable. We can do some checks on that group, and return relevant defaults.
+#  We need to return an instance, not overwrite the original defaults.
+###
+
+- name: 'user_group:group:defaults:remove'
+  when: "(group.state | default('present')) == 'absent'"
+  ansible.builtin.set_fact:
+    group_defaults_instance: "{{ ug_group_defaults_remove }}"
+
+- name: 'user_group:group:defaults:configure'
+  when: "(group.state | default('present')) == 'present'"
+  ansible.builtin.set_fact:
+    group_defaults_instance: "{{ ug_group_defaults }}"
