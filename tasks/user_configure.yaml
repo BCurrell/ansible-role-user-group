@@ -4,10 +4,7 @@
 
 # Now we can use 'user' for original input and 'user_instance' for the final object
 
-- name: 'user_group:user:debug'
-  ansible.builtin.debug:
-    var: 'user'
-
-- name: 'user_group:user:debug'
-  ansible.builtin.debug:
-    var: 'user_instance'
+- name: "user_group:user:configure:{{ user_instance.name }}"
+  ansible.builtin.user: "{{ user_instance }}"
+  tags:
+    - 'skip_ansible_lint'

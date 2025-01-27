@@ -8,3 +8,12 @@
   ansible.builtin.group: "{{ group_instance }}"
   tags:
     - 'skip_ansible_lint'
+  register: 'group_removed'
+  # This may be unnecessary, it may be better to just error and get the user to update their inventory
+  failed_when:
+    # Nothing was changed (i.e. group was successfully removed == changed)
+    - 'not group_removed.changed'
+    # group_removed has no key 'msg' (i.e. there is no error message == success)
+    - "'msg' in group_removed"
+    # Error message does not contain phrase (i.e. user still using group as primary == not supposed to delete)
+    - "'cannot remove the primary group of user' not in group_removed.msg"

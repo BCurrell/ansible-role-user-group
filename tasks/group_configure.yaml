@@ -4,10 +4,7 @@
 
 # Now we can use 'group' for original input and 'group_instance' for the final object
 
-- name: 'user_group:group:debug'
-  ansible.builtin.debug:
-    var: 'group'
-
-- name: 'user_group:group:debug'
-  ansible.builtin.debug:
-    var: 'group_instance'
+- name: "user_group:group:configure:{{ group_instance.name }}"
+  ansible.builtin.group: "{{ group_instance }}"
+  tags:
+    - 'skip_ansible_lint'
