@@ -1,0 +1,23 @@
+[project]
+name = "ansible-role-user-group"
+version = "0.0.1"
+description = "Ansible role to control users and groups on non-Windows hosts"
+authors = [
+    {name = "Brandon Currell", email = "brandon+git@currell.pw"}
+]
+readme = "README"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+	"pre-commit (>=4.0.0,<5.0.0)",
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+package-mode = false
