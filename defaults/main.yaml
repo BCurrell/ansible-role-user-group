@@ -1,1 +1,28 @@
 ---
+###
+#  Create, update and delete users and groups on non-Windows hosts
+#
+#  https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html
+#  https://docs.ansible.com/ansible/latest/collections/ansible/builtin/group_module.html
+#
+#  Any of the options on the above pages can be passed directly to the relevent Ansible module.
+#  There are a few defaults that we are going to enforce, which can also be overridden in the
+#  inventory.
+###
+
+# Define empty lists to guarantee that the variable exists.
+ug_users: []
+ug_groups: []
+
+# Defaults for creating and updating the user
+ug_user_defaults:
+
+# Defaults for removing the user
+ug_user_defaults_remove:
+  # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html#parameter-force
+  force: false
+  # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html#parameter-remove
+  remove: false
+
+# Defaults for creating and updating the group
+ug_group_defaults:

@@ -1,0 +1,4 @@
+---
+- name: 'user_group:group:remove:debug'
+  ansible.builtin.debug:
+    var: 'group'

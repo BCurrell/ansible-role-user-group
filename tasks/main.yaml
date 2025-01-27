@@ -1,1 +1,28 @@
 ---
+- name: 'user_group:users:remove'
+  loop: '{{ ug_users }}'
+  loop_control:
+    loop_var: 'user'
+  when: "(user.state | default('present')) == 'absent'"
+  ansible.builtin.include_tasks: './user_remove.yaml'
+
+- name: 'user_group:groups:remove'
+  loop: '{{ ug_groups }}'
+  loop_control:
+    loop_var: 'group'
+  when: "(group.state | default('present')) == 'absent'"
+  ansible.builtin.include_tasks: './group_remove.yaml'
+
+- name: 'user_group:users:configure'
+  loop: '{{ ug_users }}'
+  loop_control:
+    loop_var: 'user'
+  when: "(user.state | default('present')) == 'present'"
+  ansible.builtin.include_tasks: './user_configure.yaml'
+
+- name: 'user_group:groups:configure'
+  loop: '{{ ug_groups }}'
+  loop_control:
+    loop_var: 'group'
+  when: "(group.state | default('present')) == 'present'"
+  ansible.builtin.include_tasks: './group_configure.yaml'
