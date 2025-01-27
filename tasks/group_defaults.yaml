@@ -2,8 +2,12 @@
 ###
 #  When this file is included from group_*.yaml, it has access to the 'group'
 #  loop variable. We can do some checks on that group, and return relevant defaults.
-#  We need to return an instance, not overwrite the original defaults.
+#  We need to return an instance, not overwrite the original defaults. Then we
+#  can combine the defaults instance with the original group object and return
+#  a group instance.
 ###
+
+# We have an immutable 'group' available
 
 - name: 'user_group:group:defaults:remove'
   when: "(group.state | default('present')) == 'absent'"
@@ -14,3 +18,11 @@
   when: "(group.state | default('present')) == 'present'"
   ansible.builtin.set_fact:
     group_defaults_instance: "{{ ug_group_defaults }}"
+
+# We now have 'group_defaults_instance' available
+
+- name: 'user_group:group:defaults:combine'
+  ansible.builtin.set_fact:
+    group_instance: "{{ group_defaults_instance | combine(group) }}"
+
+# We now have a mutable 'group_instance' available

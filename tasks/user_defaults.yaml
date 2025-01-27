@@ -2,8 +2,12 @@
 ###
 #  When this file is included from user_*.yaml, it has access to the 'user'
 #  loop variable. We can do some checks on that user, and return relevant defaults.
-#  We need to return an instance, not overwrite the original defaults.
+#  We need to return an instance, not overwrite the original defaults. Then we
+#  can combine the defaults instance with the original user object and return
+#  a user instance.
 ###
+
+# We have an immutable 'user' available
 
 - name: 'user_group:user:defaults:remove'
   when: "(user.state | default('present')) == 'absent'"
@@ -14,3 +18,11 @@
   when: "(user.state | default('present')) == 'present'"
   ansible.builtin.set_fact:
     user_defaults_instance: "{{ ug_user_defaults }}"
+
+# We now have 'user_defaults_instance' available
+
+- name: 'user_group:user:defaults:combine'
+  ansible.builtin.set_fact:
+    user_instance: "{{ user_defaults_instance | combine(user) }}"
+
+# We now have a mutable 'user_instance' available

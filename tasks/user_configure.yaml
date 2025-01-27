@@ -1,4 +1,13 @@
 ---
-- name: 'user_group:user:configure:debug'
+- name: 'user_group:user:defaults'
+  ansible.builtin.include_tasks: './user_defaults.yaml'
+
+# Now we can use 'user' for original input and 'user_instance' for the final object
+
+- name: 'user_group:user:debug'
   ansible.builtin.debug:
     var: 'user'
+
+- name: 'user_group:user:debug'
+  ansible.builtin.debug:
+    var: 'user_instance'

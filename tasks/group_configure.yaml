@@ -1,4 +1,13 @@
 ---
-- name: 'user_group:group:remove:configure'
+- name: 'user_group:group:defaults'
+  ansible.builtin.include_tasks: './group_defaults.yaml'
+
+# Now we can use 'group' for original input and 'group_instance' for the final object
+
+- name: 'user_group:group:debug'
   ansible.builtin.debug:
     var: 'group'
+
+- name: 'user_group:group:debug'
+  ansible.builtin.debug:
+    var: 'group_instance'
