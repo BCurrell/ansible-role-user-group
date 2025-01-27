@@ -5,7 +5,7 @@ description = "Ansible role to control users and groups on non-Windows hosts"
 authors = [
     {name = "Brandon Currell", email = "brandon+git@currell.pw"}
 ]
-readme = "README"
+readme = "README.md"
 license = "MIT"
 requires-python = ">=3.10"
 dependencies = []
