@@ -7,6 +7,8 @@ Ansible role to control users and groups on non-Windows hosts.
 
 Windows hosts require [ansible.windows.win_user](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_user_module.html) and [ansible.windows.win_group](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_group_module.html), which this role does not use.
 
+I've also added the ability to control a user's authorized_keys file without using [ansible.posix.authorized_key](https://docs.ansible.com/ansible/latest/collections/ansible/posix/authorized_key_module.html). There's no guarantee that collection is available, and I don't fully agree with the way it has been developed. However, this is just an initial attempt, and I would like to add more functionality in the future.
+
 ## Usage
 
 **NOTE**: This role works by defining all of the Ansible module arguments within the inventory, with minimal parsing. This is unsafe (see [Ansible Docs - argsplat](https://docs.ansible.com/ansible/devel/reference_appendices/faq.html#argsplat-unsafe)). There is a way around this by disabling `INJECT_FACTS_AS_VARS` (see [Ansible Docs - config](https://docs.ansible.com/ansible/devel/reference_appendices/config.html#inject-facts-as-vars)). This prevents the host facts from being injected as variables. They are still accessible via `ansible_facts`.
