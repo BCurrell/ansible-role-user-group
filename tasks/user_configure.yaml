@@ -1,10 +1,10 @@
 ---
-- name: 'user_group:user:defaults'
+- name: "user_group:user:defaults:{{ user.name }}"
   ansible.builtin.include_tasks: './user_defaults.yaml'
 
 # Now we can use 'user' for original input and 'user_instance' for the final object
 
-- name: "user_group:user:configure:{{ user_instance.name }}"
+- name: 'user_group:user:configure'
   ansible.builtin.user: "{{ user_instance }}"
   tags:
     - 'skip_ansible_lint'

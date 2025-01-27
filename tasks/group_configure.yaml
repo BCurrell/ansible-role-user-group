@@ -1,10 +1,10 @@
 ---
-- name: 'user_group:group:defaults'
+- name: "user_group:group:defaults:{{ group.name }}"
   ansible.builtin.include_tasks: './group_defaults.yaml'
 
 # Now we can use 'group' for original input and 'group_instance' for the final object
 
-- name: "user_group:group:configure:{{ group_instance.name }}"
+- name: 'user_group:group:configure'
   ansible.builtin.group: "{{ group_instance }}"
   tags:
     - 'skip_ansible_lint'
