@@ -16,6 +16,20 @@ ug_groups: []
 
 # Defaults for creating and updating the user
 ug_user_defaults:
+  # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html#parameter-create_home
+  create_home: true
+  # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html#parameter-expires
+  expires: -1.0
+  # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html#parameter-move_home
+  move_home: true
+  # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html#parameter-skeleton
+  skeleton: '/etc/skel'
+  # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html#parameter-ssh_key_bits
+  ssh_key_bits: 4096
+  # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html#parameter-ssh_key_file
+  ssh_key_file: '.ssh/id_ed25519'
+  # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html#parameter-ssh_key_type
+  ssh_key_type: 'ed25519'
 
 # Defaults for removing the user
 ug_user_defaults_remove:
