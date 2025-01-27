@@ -8,3 +8,39 @@
   ansible.builtin.user: "{{ user_instance }}"
   tags:
     - 'skip_ansible_lint'
+  register: 'user_configured'
+
+# Configure authorized keys manually for 2 reasons:
+#  - ansible.posix may not be available
+#  - ansible.posix.authorized_key does things in a weird way
+
+- name: 'user_group:user:authorized_keys:configure'
+  when: 'user_authorized_keys is defined'
+  block:
+    - name: 'user_group:user:authorized_keys:directory'
+      ansible.builtin.file:
+        # TODO: Make this configurable
+        path: "{{ user_configured.home }}/.ssh"
+        state: 'directory'
+        owner: "{{ user_configured.name }}"
+        group: "{{ user_configured.group }}"
+        mode: '0700'
+      register: 'user_authorized_keys_directory'
+
+    - name: 'user_group:user:authorized_keys:remove'
+      when: 'not ug_user_default_authorized_keys_append'
+      ansible.builtin.file:
+        # TODO: Make this configurable
+        path: "{{ user_authorized_keys_directory.path }}/authorized_keys"
+        state: 'absent'
+
+    - name: 'user_group:user:authorized_keys:file'
+      loop: "{{ user_authorized_keys }}"
+      ansible.builtin.lineinfile:
+        # TODO: Make this configurable
+        path: "{{ user_authorized_keys_directory.path }}/authorized_keys"
+        create: true
+        owner: "{{ user_configured.name }}"
+        group: "{{ user_configured.group }}"
+        mode: '0600'
+        line: "{{ item }}"

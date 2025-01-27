@@ -31,6 +31,8 @@ ug_user_defaults:
   # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html#parameter-ssh_key_type
   ssh_key_type: 'ed25519'
 
+ug_user_default_authorized_keys_append: true
+
 # Defaults for removing the user
 ug_user_defaults_remove:
   # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html#parameter-force

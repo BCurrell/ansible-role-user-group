@@ -26,3 +26,8 @@
     user_instance: "{{ user_defaults_instance | combine(user) }}"
 
 # We now have a mutable 'user_instance' available
+
+- name: 'user_group:user:authorized_keys:pop'
+  ansible.builtin.set_fact:
+    user_authorized_keys: "{{ user_instance.authorized_keys | default(omit) }}"
+    user_instance: "{{ user_instance | dict2items | rejectattr('key', 'equalto', 'authorized_keys') | items2dict }}"
